@@ -1,9 +1,13 @@
 :root{
     --main-color : #232D3F;
-    --purple-color : #610C9F;
-    --lighter-purple-color : #940B92;
-    --dark-pink-color : #DA0C81;
-    --lighter-pink-color : #E95793;
+    --purple-color : #875EEB;
+    --lighter-purple-color : #5E63EB;
+    --dark-pink-color : #5EBCEB;
+    --lighter-pink-color : #B55EEB;
+    --new-ticket-color : #FE413B;
+    --ticket-pending-color : #5EDAEB;
+    --ticket-solved-color:#3BF54F;
+    --fade-active-background: rgba(135, 94, 235, 0.22);
 }
 
 .bg-main{
