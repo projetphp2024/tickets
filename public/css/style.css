@@ -1,13 +1,23 @@
 :root{
     --main-color : #232D3F;
-    --purple-color : #610C9F;
-    --lighter-purple-color : #940B92;
-    --dark-pink-color : #DA0C81;
-    --lighter-pink-color : #E95793;
+    --purple-color : #875EEB;
+    --lighter-purple-color : #5E63EB;
+    --dark-pink-color : #5EBCEB;
+    --lighter-pink-color : #B55EEB;
+    --new-ticket-color : #FE413B;
+    --ticket-pending-color : #5EDAEB;
+    --ticket-solved-color:#3BF54F;
+    --fade-active-background: rgba(135, 94, 235, 0.22);
+    --border-gradient: rgba(94, 218, 235, 1);
+    --hover-image: rgba(135, 94, 235, 0.6);
 }
 
 .bg-main{
     background-color: var(--main-color);
+}
+
+.bg-fade-active{
+    background-color: var(--fade-active-background);
 }
 
 .bg-purple{
@@ -23,19 +33,92 @@
     background-color: var(--lighter-pink-color);
 }
 
-.text-main{
-   color: var(--main-color); 
-}
-.text-purple{
-   color: var(--purple-color); 
-}
-.text-lighter-purple{
-   color: var(--lighter-purple-color); 
-}
-.text-dark-pink{
-   color: var(--dark-pink-color); 
-}
-.text-lighter-pink{
-   color: var(--lighter-pink-color); 
+.bg-new-ticket{
+    background-color: var(--new-ticket-color);
 }
 
+.bg-ticket-pending{
+    background-color: var(--ticket-pending-color);
+}
+
+.bg-ticket-solved{
+    background-color: var(--ticket-solved-color);
+}
+
+.text-fade-active{
+   color: var(--fade-active-background);
+}
+
+.text-ticket-solved{
+   color: var(--ticket-solved-color);
+}
+
+.text-ticket-pending{
+   color: var(--ticket-pending-color);
+}
+
+.text-new-ticket{
+   color: var(--new-ticket-color);
+}
+
+.text-main{
+   color: var(--main-color);
+}
+.text-purple{
+   color: var(--purple-color);
+}
+.text-lighter-purple{
+   color: var(--lighter-purple-color);
+}
+.text-dark-pink{
+   color: var(--dark-pink-color);
+}
+.text-lighter-pink{
+   color: var(--lighter-pink-color);
+}
+
+
+.dropdown-toggle::after {
+    border-top: 0.5em solid;
+    border-right: 0.5em solid transparent;
+    border-bottom: 0;
+    border-left: 0.5em solid transparent;
+}
+
+.sidebar .nav-link{
+    display: flex;
+    align-items: center;
+    color: white;
+}
+
+.sidebar .nav-link svg{
+    width: 22px;
+    height: 22px;
+}
+
+.sidebar .nav-link *{
+    color: white;
+    fill: white;
+}
+
+.sidebar .nav-link:hover *{
+    color: var(--ticket-pending-color);
+    fill: var(--ticket-pending-color);
+}
+
+.sidebar .nav-link span{
+    margin-left: 10px;
+}
+
+.sidebar .nav-link:hover{
+    background-color: var(--fade-active-background);
+}
+
+.sidebar-mobile .nav-item{
+    flex: 1;
+}
+
+.sidebar-mobile .nav-link{
+    padding: 15px 0;
+    justify-content: center;
+}
