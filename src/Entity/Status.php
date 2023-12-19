@@ -1,15 +1,17 @@
 <?php
 
 namespace App\Entity;
-
-use App\Repository\StatusRepository;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
+use App\Entity\Trait\slugTrait;
+use App\Entity\Tickets;
 use Doctrine\ORM\Mapping as ORM;
+use App\Repository\StatusRepository;
+use Doctrine\Common\Collections\Collection;
+use Doctrine\Common\Collections\ArrayCollection;
 
 #[ORM\Entity(repositoryClass: StatusRepository::class)]
 class Status
 {
+    use slugTrait;
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
