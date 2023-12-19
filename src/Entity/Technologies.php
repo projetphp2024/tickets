@@ -2,14 +2,17 @@
 
 namespace App\Entity;
 
-use App\Repository\TechnologiesRepository;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
+use App\Entity\Tickets;
+use App\Entity\Trait\slugTrait;
 use Doctrine\ORM\Mapping as ORM;
+use App\Repository\TechnologiesRepository;
+use Doctrine\Common\Collections\Collection;
+use Doctrine\Common\Collections\ArrayCollection;
 
 #[ORM\Entity(repositoryClass: TechnologiesRepository::class)]
 class Technologies
 {
+    use slugTrait;
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
