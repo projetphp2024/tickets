@@ -12,6 +12,16 @@
     --hover-image: rgba(135, 94, 235, 0.6);
 }
 
+body{
+    background-color: #F9F9FB;
+}
+
+.page-title{
+    color: var(--dark-pink-color);
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
 .bg-main {
     background-color: var(--main-color);
 }
