@@ -12,10 +12,6 @@
     --hover-image: rgba(135, 94, 235, 0.6);
 }
 
-body {
-    background-color: #F9F9FB;
-}
-
 .bg-main {
     background-color: var(--main-color);
 }
