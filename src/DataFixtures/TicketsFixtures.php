@@ -122,6 +122,16 @@ class TicketsFixtures extends Fixture implements DependentFixtureInterface
             $randomStatusId = $statusIds[array_rand($statusIds)];
             $status = $manager->getRepository(Status::class)->find($randomStatusId);
             $ticket->setStatus($status);
+            // Associer un utilisateur au hasard selon le statut
+            if ($status && in_array($status->getLabel(), ['Résolut', 'Archivé'])) {
+                $randomUserId = $userIds[array_rand($userIds)];
+                $user = $manager->getRepository(User::class)->find($randomUserId);
+                // Vérifier si l'utilisateur existe avant de l'associer au ticket
+                if ($user) {
+                    $ticket->setSolvedBy($user);
+                }
+            }
+
 
             // Associer plusieurs commentaire aléatoirement
             $numComments = mt_rand(1, 5); // Choose the maximum number of comments per ticket
