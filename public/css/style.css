@@ -129,25 +129,3 @@
     padding: 15px 0;
     justify-content: center;
 }
-
-.btn-second{
-    border-radius: 4px;
-    border: 1px solid var(--dark-pink-color);
-    color: var(--dark-pink-color);
-    padding: 10px;
-}
-.btn-second:hover{
-    border: 1px solid var(--dark-pink-color);
-    color: white;
-    background-color: var(--dark-pink-color);
-}
-.btn-first{
-    border-radius: 4px;
-    background-color: var(--dark-pink-color);
-    color: white;
-    padding: 10px;
-}
-.btn-first:hover{
-    border: 1px solid var(--dark-pink-color);
-    color: var(--dark-pink-color);
-}
