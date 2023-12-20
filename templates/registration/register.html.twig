@@ -1,0 +1,47 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Register{% endblock %}
+
+{% block body %}
+    <div class="container-fluid">
+        <h1>Créer un compte</h1>
+        <div class="card bg-white">
+            <div class="card-body">
+                {{ form_errors(registrationForm) }}
+
+                {{ form_start(registrationForm) }}
+
+                <div class="container text-center mt-5">
+                    <div class="row mt-3 d-flex justify-content-around">
+                        <div class="col-lg-3 col-md-4 col-sm-12">
+                            <label for="exampleFormControlInput1" class="form-label">{{ form_row(registrationForm.email) }}</label>
+                        </div>
+                        <div class="col-lg-3 col-md-4 col-sm-12">
+                            <label for="exampleFormControlInput1" class="form-label">{{ form_row(registrationForm.firstName) }}</label>
+                        </div>
+                        <div class="col-lg-3 col-md-4 col-sm-12">
+                            <label for="exampleFormControlInput1" class="form-label">{{ form_row(registrationForm.lastName) }}</label>
+                        </div>
+                        <div class="col-lg-3 col-md-4 col-sm-12">
+                            <label for="exampleFormControlInput1" class="form-label">{{ form_row(registrationForm.pseudo) }}</label>
+                        </div>
+                    </div>
+                    <div class="row justify-content-center mt-5">
+                        <div class="col-md-4 ">
+                            <div id="passwordHelpBlock" class="form-text">
+                                {{ form_row(registrationForm.plainPassword, { label: 'Password'}) }}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row justify-content-center mt-5">
+                        <div class="col-md-4">
+                            <button type="submit" class="btn-first">Création compte</button>
+                        </div>
+                    </div>
+                </div>
+                {{ form_row(registrationForm.agreeTerms) }}
+                {{ form_end(registrationForm) }}
+            </div>
+        </div>
+    </div>
+{% endblock %}
