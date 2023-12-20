@@ -22,6 +22,11 @@ class Images
     #[ORM\Column(length: 255)]
     private ?string $path = null;
 
+    public function getId(): ?int
+    {
+        return $this->id;
+    }
+
     public function getTicket(): ?Tickets
     {
         return $this->ticket;

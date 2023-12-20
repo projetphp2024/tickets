@@ -43,6 +43,7 @@ class Tickets
     #[ORM\ManyToOne(inversedBy: 'tickets')]
     private ?User $solvedBy = null;
 
+
     #[ORM\OneToMany(mappedBy: 'ticket', targetEntity: Comments::class)]
     private Collection $comments;
 
