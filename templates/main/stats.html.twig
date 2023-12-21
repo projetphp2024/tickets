@@ -1,0 +1,62 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+<div class="container-fluid">
+    <h1 class="page-title">Stats</h1>
+    <div class="card bg-white main-section">
+        <div class="card-body">
+            <!-- Statistiques pour aujourd'hui -->
+            <div class="row text-center mb-4">
+                <div class="col">
+                    <h2>Aujourd'hui {{ "now"|date("d/m/Y") }}</h2>
+                </div>
+            </div>
+            <div class="row text-center mb-4">
+                <!-- Statistique 1 -->
+                <div class="col">
+                    <div class="card">
+                        <div class="card-body">
+                            <h3>3</h3>
+                            <p>NOUVEAUX</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- Statistique 2 -->
+                <div class="col">
+                    <div class="card">
+                        <div class="card-body">
+                            <h3>3</h3>
+                            <p>EN COURS</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- Statistique 3 -->
+                <div class="col">
+                    <div class="card">
+                        <div class="card-body">
+                            <h3>3</h3>
+                            <p>CLÔTURÉS</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- Statistique 4 avec image -->
+                <div class="col">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="image-container" style="position: relative;">
+                                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTkq3iQYVKllbdVHi-Lry0cRuKzGMMnWhEFCg&usqp=CAU" alt="Image" style="width:100%;">
+                                <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);">
+                                    <h3>2</h3>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Continue with other time periods as needed -->
+        </div>
+    </div>
+</div>
+
+{% endblock %}

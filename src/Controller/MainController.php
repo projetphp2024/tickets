@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Status;
 use App\Repository\StatusRepository;
 use App\Repository\TicketsRepository;
+use App\Repository\UserRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -21,6 +22,15 @@ class MainController extends AbstractController
             'controller_name' => 'MainController',
             'status' => $status,
             'tickets' => $tickets
+        ]);
+    }
+    #[Route('/stats', name: 'app_stats')]
+    public function stats(): Response
+    {
+
+        return $this->render('main/stats.html.twig', [
+            'controller_name' => 'MainController',
+        
         ]);
     }
 }
