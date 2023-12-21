@@ -62,25 +62,19 @@ class ImagesFixtures extends Fixture implements DependentFixtureInterface
         $ticketIds = $this->getTicketIds($manager);
         $userIds = $this->getUsersIds($manager);
 
-        $totalImages = 55;
+        $totalImages = 40;
         $userImageLimit = count($userIds);
         $commentImageLimit = ($totalImages - $userImageLimit) / 2;
 
         for ($i = 1; $i <= $totalImages; $i++) {
             $image = new Images();
 
-            // Choisissez un ID d'utilisateur au hasard
-            $randomUserId = $userIds[array_rand($userIds)];
-
             // Définir le chemin de l'image en utilisant le chemin de base et le numéro d'itération
             $imagePath = "snow.jpg";
             $image->setPath($imagePath);
 
             // Attribuer les images équitablement entre les utilisateurs et les commentaires
-            if ($i <= $userImageLimit) {
-                $user = $manager->getRepository(User::class)->find($randomUserId);
-                $user->addImage($image);
-            } elseif ($i <= $userImageLimit + $commentImageLimit) {
+           if ($i <= $userImageLimit + $commentImageLimit) {
                 $randomCommentId = $commentIds[array_rand($commentIds)];
                 $comment = $manager->getRepository(Comments::class)->find($randomCommentId);
                 $image->setComment($comment);

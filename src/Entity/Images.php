@@ -28,18 +28,6 @@ class Images
     #[ORM\Column(length: 255)]
     private ?string $path = null;
 
-    #[ORM\ManyToOne(inversedBy: 'images')]
-    private ?User $user = null;
-
-
-
-    public function __construct()
-    {
-        
-    }
-
-   
-
     public function getId(): ?int
     {
         return $this->id;
@@ -82,17 +70,7 @@ class Images
         return $this;
     }
 
-    public function getUser(): ?User
-    {
-        return $this->user;
-    }
 
-    public function setUser(?User $user): static
-    {
-        $this->user = $user;
-
-        return $this;
-    }
 
 
 

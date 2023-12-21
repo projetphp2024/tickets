@@ -2,7 +2,7 @@
     
 namespace App\Entity;
 
-use App\Entity\Images;
+use App\Entity\avatarPath;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\UserRepository;
@@ -48,12 +48,12 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(length: 255,)]
     private ?string $pseudo = null;
 
-    #[ORM\OneToMany(mappedBy: 'user', targetEntity: Images::class)]
-    private Collection $images;
+    #[ORM\Column(length: 255,)]
+    private ?string $avatarPath;
 
     public function __construct()
     {
-        $this->images = new ArrayCollection();
+      
     }
 
     
@@ -168,36 +168,20 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
         return $this;
     }
-
-    /**
-     * @return Collection<int, Images>
-     */
-    public function getImages(): Collection
+    public function getAvatarPath(): ?string
     {
-        return $this->images;
+        return $this->avatarPath;
     }
 
-    public function addImage(Images $image): static
+    public function setAvatarPath(string $avatarPath): static
     {
-        if (!$this->images->contains($image)) {
-            $this->images->add($image);
-            $image->setUser($this);
-        }
+        $this->avatarPath = $avatarPath;
 
         return $this;
     }
 
-    public function removeImage(Images $image): static
-    {
-        if ($this->images->removeElement($image)) {
-            // set the owning side to null (unless already changed)
-            if ($image->getUser() === $this) {
-                $image->setUser(null);
-            }
-        }
 
-        return $this;
-    }
+   
 
   
 }
