@@ -7,6 +7,7 @@
     --new-ticket-color: #FE413B;
     --ticket-pending-color: #5EDAEB;
     --ticket-solved-color: #3BF54F;
+    --ticket-archived-color: #778899;
     --fade-active-background: rgba(135, 94, 235, 0.22);
     --border-gradient: rgba(94, 218, 235, 1);
     --hover-image: rgba(135, 94, 235, 0.6);
@@ -174,4 +175,17 @@ body{
 
 .table tbody td{
     text-align: center;
+}
+
+.btn-modify{
+    border-radius: 4px;
+    background-color: var(--dark-pink-color);
+    color: white;
+    padding: 10px;
+}
+.btn-delete{
+    border-radius: 4px;
+    background-color: var(--new-ticket-color);
+    color: white;
+    padding: 10px;
 }
