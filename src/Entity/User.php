@@ -64,7 +64,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
 
 
-
     public function getId(): ?int
     {
         return $this->id;
@@ -73,18 +72,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function getFullName(): ?string
     {
         return $this->firstName . " " . $this->lastName;
-    }
-
-    public function getTicketSolved(): ?int
-    {
-        return $this->ticketSolved;
-    }
-
-    public function setTicketSolved(?int $ticketSolved): self
-    {
-        $this->ticketSolved = $ticketSolved;
-
-        return $this;
     }
 
     public function getEmail(): ?string

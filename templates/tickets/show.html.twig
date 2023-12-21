@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Tickets{% endblock %}
+
+{% block body %}
+
+    <div class="wrapper">
+        <p class="page-title h1">Tickets</p>
+        <div class="card">
+            <div class="card-body">
+                <div class="d-flex justify-content-between flex-wrap">
+                    <div class="d-flex align-items-center mb-3">
+                        <span class="rounded-circle dot-status" style="background-color: {{ ticket.status.color }}"></span>
+                        <span> {{ticket.status.label}} </span>
+                    </div>
+                    <p><strong>Publier le :</strong> {{ticket.createdAt|date('Y-m-d H:i')}} </p>
+                </div>
+                <div>
+                    <h1 class="h4"> {{ticket.title}} </h1>
+                    <p style="white-space: pre-line;" class="mt-3"> {{ticket.description}} </p>
+                </div>
+                <div class="mt-5">
+                    dozpj
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+{% endblock %}
