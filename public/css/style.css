@@ -162,6 +162,21 @@ body{
     border: 1px solid var(--dark-pink-color);
     color: var(--dark-pink-color);
 }
+
+.table thead th span{
+    display: block;
+    text-align: center;
+    padding: 10px;
+    background-color:  var(--hover-image);
+    color: white;
+    margin-right: 20px;
+    width: 100%;
+}
+
+.table tbody td{
+    text-align: center;
+}
+
 .btn-modify{
     border-radius: 4px;
     background-color: var(--dark-pink-color);
