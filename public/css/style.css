@@ -161,3 +161,16 @@ body{
     border: 1px solid var(--dark-pink-color);
     color: var(--dark-pink-color);
 }
+
+.table thead th span{
+    display: block;
+    text-align: center;
+    padding: 10px;
+    border: 5px solid var(--hover-image);
+    margin-right: 20px;
+    width: 100%;
+}
+
+.table tbody td{
+    text-align: center;
+}

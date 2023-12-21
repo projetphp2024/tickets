@@ -1,18 +1,18 @@
 <table class="table">
     <thead>
         <tr>
-            <th scope="col">Titre</th>
-            <th scope="col">Status</th>
-            <th scope="col">Catégorie</th>
-            <th scope="col">Utilisateur</th>
-            <th scope="col">Date de création</th>
-            <th scope="col">Actions</th>
+            <th scope="col"><span>Titre</span></th>
+            <th scope="col"><span>Status</span></th>
+            <th scope="col"><span>Catégorie</span></th>
+            <th scope="col"><span>Utilisateur</span></th>
+            <th scope="col"><span>Date de création</span></th>
+            <th scope="col"><span>Actions</span></th>
         </tr>
     </thead>
     <tbody>
         {% for ticket in tickets %}
         <tr>
-            <td class="text-truncate"> {{ticket.title}} </td>
+            <td> {{ticket.title | slice(0,50)}}... </td>
             <td>{{ticket.status.label}}</td>
             <td>
                 <div class="d-flex align-items-center">
@@ -22,7 +22,7 @@
             </td>
             <td> {{ ticket.categorie.label }} - {{ ticket.technologie.label }}  </td>
             <td> {{ticket.createdAt | date('d M Y') }} </td>
-            <td class="d-flex">
+            <td>
                 <a href="#" class="btn">
                     <svg width="24" height="24" viewBox="0 0 38 38" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path
