@@ -48,13 +48,15 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(length: 255,)]
     private ?string $pseudo = null;
 
-    #[ORM\Column(length: 255,)]
-    private ?string $avatarPath;
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $avatarPath = null;
 
+ 
     public function __construct()
     {
-      
+        $this->roles = [self::ROLE_USER]; 
     }
+
 
     
     
@@ -168,18 +170,19 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
         return $this;
     }
+
     public function getAvatarPath(): ?string
     {
         return $this->avatarPath;
     }
 
-    public function setAvatarPath(string $avatarPath): static
+    public function setAvatarPath(?string $avatarPath): static
     {
         $this->avatarPath = $avatarPath;
 
         return $this;
     }
-
+ 
 
    
 
