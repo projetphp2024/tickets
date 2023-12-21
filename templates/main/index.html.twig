@@ -37,12 +37,12 @@
 			border-bottom: 2px solid var(--lighter-purple-color);
 			font-weight: bold;
 		}
-		.active-status{
+		.active-status {
 			cursor: not-allowed;
 			pointer-events: none;
 
 		}
-		active-status:hover{
+		active-status:hover {
 			cursor: not-allowed;
 			pointer-events: none;
 		}
@@ -56,8 +56,9 @@
 					class="d-flex justify-content-between align-items-center mb-3">
 					{# SEARCH BAR #}
 					<form class="form-inline my-2 my-lg-0 d-flex flex-row">
-						<input class="form-control mr-sm-2 search-bar" type="search" placeholder="Rechercher un ticket" aria-label="Search">
-						{# <button class="btn my-2 my-sm-0 ms-2 btn-second" type="submit">Rechercher</button> #}
+						<input
+						class="form-control mr-sm-2 search-bar" type="search" placeholder="Rechercher un ticket" aria-label="Search">
+					{# <button class="btn my-2 my-sm-0 ms-2 btn-second" type="submit">Rechercher</button> #}
 					</form>
 
 					<div>
@@ -116,31 +117,13 @@
 						</div>
 					</div>
 				{% endfor %}
-
-				{# PAGE #}
-				{# <nav aria-label="Page navigation example">
-													<ul class="pagination justify-content-center">
-														<li class="page-item disabled">
-															<a class="page-link" href="#" tabindex="-1" aria-disabled="true">Précédent</a>
-														</li>
-														<li class="page-item">
-															<a class="page-link" href="#">1</a>
-														</li>
-														<li class="page-item">
-															<a class="page-link" href="#">2</a>
-														</li>
-														<li class="page-item">
-															<a class="page-link" href="#">Suivant</a>
-														</li>
-													</ul>
-												</nav> #}
 			</div>
 		</div>
 	</div>
 </div>
 <script>
-// Filter tickets by status
-	function updateActiveStatus(selectElement) {
+	// Filter tickets by status
+function updateActiveStatus(selectElement) {
 var selectedStatus = selectElement.value;
 
 // Update active status
@@ -157,9 +140,9 @@ button.classList.remove('active-btn');
 var tickets = document.querySelectorAll('.ticket-item');
 tickets.forEach(function (ticket) {
 if (selectedStatus === '' || ticket.classList.contains(selectedStatus)) {
-ticket.style.display = ''; 
+ticket.style.display = '';
 } else {
-ticket.style.display = 'none'; 
+ticket.style.display = 'none';
 }
 });
 }
@@ -192,19 +175,19 @@ ticket.style.display = display ? '' : 'none';
 }
 // Live search
 function liveSearch() {
-    var searchInput = document.querySelector('.search-bar').value.toLowerCase();
-    var tickets = document.querySelectorAll('.ticket-item');
+var searchInput = document.querySelector('.search-bar').value.toLowerCase();
+var tickets = document.querySelectorAll('.ticket-item');
 
-    tickets.forEach(function (ticket) {
-        var title = ticket.querySelector('h5').textContent.toLowerCase();
-        var description = ticket.querySelector('p').textContent.toLowerCase();
+tickets.forEach(function (ticket) {
+var title = ticket.querySelector('h5').textContent.toLowerCase();
+var description = ticket.querySelector('p').textContent.toLowerCase();
 
-        if (title.includes(searchInput) || description.includes(searchInput)) {
-            ticket.style.display = '';
-        } else {
-            ticket.style.display = 'none';
-        }
-    });
+if (title.includes(searchInput) || description.includes(searchInput)) {
+ticket.style.display = '';
+} else {
+ticket.style.display = 'none';
+}
+});
 }
 
 // addEventListener to search bar
@@ -212,8 +195,8 @@ document.querySelector('.search-bar').addEventListener('input', liveSearch);
 
 // Prevent form submission on enter
 document.querySelector('.search-bar').addEventListener('keypress', function (e) {
-    if (e.key === 'Enter') {
-        e.preventDefault();
-    }
+if (e.key === 'Enter') {
+e.preventDefault();
+}
 });
 </script>{% endblock %}
