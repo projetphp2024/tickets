@@ -1,4 +1,20 @@
 {{ form_start(form) }}
-    {{ form_widget(form) }}
+    <div class="row">
+        <div class="col-12 mb-2">
+            {{ form_row(form.title) }}
+        </div>
+        <div class="col-12 mb-2">
+            {{ form_row(form.status) }}
+        </div>
+        <div class="col-12 col-md-6 mb-2">
+            {{ form_row(form.categorie) }}
+        </div>
+        <div class="col-12 col-md-6 mb-2">
+            {{ form_row(form.technologie) }}
+        </div>
+        <div class="col-12 mb-2">
+            {{ form_row(form.description) }}
+        </div>
+    </div>
     <button class="btn">{{ button_label|default('Save') }}</button>
 {{ form_end(form) }}

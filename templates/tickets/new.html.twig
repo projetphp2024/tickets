@@ -3,9 +3,16 @@
 {% block title %}New Tickets{% endblock %}
 
 {% block body %}
-    <h1>Create new Tickets</h1>
-
-    {{ include('tickets/_form.html.twig') }}
-
-    <a href="{{ path('app_tickets_index') }}">back to list</a>
+<div class="wrapper">
+    <h1 class="page-title">Nouveau ticket</h1>
+    <div class="card">
+        <div class="card-header bg-white border-0">
+            <p class="h4">Créer rapidement votre ticket</p>
+            <p>Rédiger et traiter de nouvelles requêtes et problèmes</p>
+        </div>
+        <div class="card-body">
+            {{ include('tickets/_form.html.twig') }}
+        </div>
+    </div>
+</div>
 {% endblock %}
