@@ -26,11 +26,6 @@ class TicketsType extends AbstractType
                 'label' => 'Description',
                 'attr' => ['class' => 'form-control-lg', 'rows' => 10]
             ])
-            ->add('status', EntityType::class,[
-                'class' => Status::class,
-                'choice_label' => 'label',
-                'attr' => ['class' => 'form-control-lg']
-            ])
             ->add('categorie',EntityType::class,[
                 'class' => Categories::class,
                 'choice_label' => 'label',

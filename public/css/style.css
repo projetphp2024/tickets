@@ -183,9 +183,19 @@ body{
     color: white;
     padding: 10px;
 }
+
 .btn-delete{
     border-radius: 4px;
     background-color: var(--new-ticket-color);
     color: white;
     padding: 10px;
+}
+
+.dot-status {
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    display: inline-block;
+    margin-right: 10px;
+    background-color: var(--new-ticket-color);
 }
