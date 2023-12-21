@@ -14,14 +14,16 @@
         <tr>
             <td> {{ticket.title | slice(0,50)}}... </td>
             <td>{{ticket.status.label}}</td>
+            <td> {{ ticket.categorie.label }} - {{ ticket.technologie.label }} </td>
             <td>
                 <div class="d-flex align-items-center">
-                    <img class="me-2" width="28" height="28" style="border-radius: 90%; " src="https://png.pngtree.com/png-vector/20200614/ourlarge/pngtree-businessman-user-avatar-character-vector-illustration-png-image_2242909.jpg" alt="">
+                    <img class="me-2" width="28" height="28" style="border-radius: 90%; "
+                        src="https://png.pngtree.com/png-vector/20200614/ourlarge/pngtree-businessman-user-avatar-character-vector-illustration-png-image_2242909.jpg"
+                        alt="">
                     <span> {{ticket.user.fullName}} </span>
                 </div>
             </td>
-            <td> {{ ticket.categorie.label }} - {{ ticket.technologie.label }}  </td>
-            <td> {{ticket.createdAt | date('d M Y') }} </td>
+            <td> {{ticket.createdAt | date('Y-m-d H:i')  }} </td>
             <td>
                 <a href="#" class="btn">
                     <svg width="24" height="24" viewBox="0 0 38 38" fill="none" xmlns="http://www.w3.org/2000/svg">
