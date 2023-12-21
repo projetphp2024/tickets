@@ -3,7 +3,12 @@
 namespace App\Entity;
 
 use App\Repository\ImagesRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+
+
+
 
 #[ORM\Entity(repositoryClass: ImagesRepository::class)]
 class Images
@@ -18,6 +23,7 @@ class Images
 
     #[ORM\ManyToOne(inversedBy: 'images')]
     private ?Comments $comment = null;
+
 
     #[ORM\Column(length: 255)]
     private ?string $path = null;
@@ -51,6 +57,7 @@ class Images
         return $this;
     }
 
+
     public function getPath(): ?string
     {
         return $this->path;
@@ -62,5 +69,9 @@ class Images
 
         return $this;
     }
+
+
+
+
 
 }

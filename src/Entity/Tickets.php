@@ -38,7 +38,7 @@ class Tickets
     private ?Categories $categorie = null;
 
     #[ORM\ManyToOne(inversedBy: 'tickets')]
-    private ?technologies $technologie = null;
+    private ?Technologies $technologie = null;
 
     #[ORM\ManyToOne(inversedBy: 'tickets')]
     private ?User $solvedBy = null;

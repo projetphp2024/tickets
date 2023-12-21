@@ -11,7 +11,7 @@ use Doctrine\ORM\Mapping as ORM;
 #[ORM\Entity(repositoryClass: CategoriesRepository::class)]
 class Categories
 {
-    use slugTrait;
+    // use slugTrait;
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
@@ -23,16 +23,14 @@ class Categories
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $color = null;
 
-    #[ORM\OneToMany(mappedBy: 'categorie', targetEntity: Tickets::class)]
-    private Collection $technologie;
+    #[ORM\ManyToOne(inversedBy: 'categories')]
+    private ?Technologies $technologie = null;
 
-    #[ORM\OneToMany(mappedBy: 'technologie', targetEntity: Tickets::class)]
-    private Collection $tickets;
+ 
 
     public function __construct()
     {
-        $this->technologie = new ArrayCollection();
-        $this->tickets = new ArrayCollection();
+ 
     }
 
     public function getId(): ?int
@@ -64,63 +62,17 @@ class Categories
         return $this;
     }
 
-    /**
-     * @return Collection<int, Tickets>
-     */
-    public function getTechnologie(): Collection
+    public function getTechnologie(): ?Technologies
     {
         return $this->technologie;
     }
 
-    public function addTechnologie(Tickets $technologie): static
+    public function setTechnologie(?Technologies $technologie): static
     {
-        if (!$this->technologie->contains($technologie)) {
-            $this->technologie->add($technologie);
-            $technologie->setCategorie($this);
-        }
+        $this->technologie = $technologie;
 
         return $this;
     }
 
-    public function removeTechnologie(Tickets $technologie): static
-    {
-        if ($this->technologie->removeElement($technologie)) {
-            // set the owning side to null (unless already changed)
-            if ($technologie->getCategorie() === $this) {
-                $technologie->setCategorie(null);
-            }
-        }
-
-        return $this;
-    }
-
-    /**
-     * @return Collection<int, Tickets>
-     */
-    public function getTickets(): Collection
-    {
-        return $this->tickets;
-    }
-
-    public function addTicket(Tickets $ticket): static
-    {
-        if (!$this->tickets->contains($ticket)) {
-            $this->tickets->add($ticket);
-            $ticket->setTechnologie($this);
-        }
-
-        return $this;
-    }
-
-    public function removeTicket(Tickets $ticket): static
-    {
-        if ($this->tickets->removeElement($ticket)) {
-            // set the owning side to null (unless already changed)
-            if ($ticket->getTechnologie() === $this) {
-                $ticket->setTechnologie(null);
-            }
-        }
-
-        return $this;
-    }
+    
 }
