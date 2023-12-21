@@ -51,6 +51,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $avatarPath = null;
 
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $discordPath = null;
+
  
     public function __construct()
     {
@@ -179,6 +182,18 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setAvatarPath(?string $avatarPath): static
     {
         $this->avatarPath = $avatarPath;
+
+        return $this;
+    }
+
+    public function getDiscordPath(): ?string
+    {
+        return $this->discordPath;
+    }
+
+    public function setDiscordPath(?string $discordPath): static
+    {
+        $this->discordPath = $discordPath;
 
         return $this;
     }

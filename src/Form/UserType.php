@@ -39,6 +39,7 @@ class UserType extends AbstractType
                         'Administrateur' => 'ROLE_ADMIN',
                     ],
                 ])
+                ->add('discordPath')
                 ->add('image', FileType::class, [
                     'label' => 'Photo de l’article',
                     'mapped' => false,
@@ -57,6 +58,7 @@ class UserType extends AbstractType
             $builder
                 ->add('email')
                 ->add('pseudo')
+                ->add('discordPath')
                 ->add('image', FileType::class, [
                     'label' => 'Photo de l’article',
                     'mapped' => false,
@@ -78,6 +80,7 @@ class UserType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => User::class,
+            'user_roles' => [], 
         ]);
     }
 }

@@ -45,6 +45,7 @@ class UserFixtures extends Fixture
                 $this->passwordEncoder->hashPassword($user, 'password')
             );
             $manager->persist($user);
+            $user->setDiscordPath("discord ".$faker->lastName);
         }
 
         $manager->flush();

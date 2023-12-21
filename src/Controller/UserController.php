@@ -18,10 +18,12 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 class UserController extends AbstractController
 {
     #[Route('/', name: 'app_user_index', methods: ['GET'])]
-    public function index(UserRepository $userRepository): Response
-    {
+    public function index(UserRepository $userRepository, TicketsRepository $ticketsRepository): Response
+    {   $tickets = $ticketsRepository->findAll();
         return $this->render('user/index.html.twig', [
             'users' => $userRepository->findAll(),
+            'tickets' => $tickets,
+            //'solvedByUser => $ticketsRepository-> faire un count solved by id = user.id
         ]);
     }
 
@@ -46,11 +48,14 @@ class UserController extends AbstractController
     }
 
     #[Route('/{id}', name: 'app_user_show', methods: ['GET'])]
-    public function show(User $user, ImagesRepository $imageRepository, StatusRepository $statusRepository, TicketsRepository $ticketsRepository): Response
+    public function show(User $user, ImagesRepository $imageRepository, StatusRepository $statusRepository, TicketsRepository $ticketsRepository, $id): Response
     {
+
         $images = $imageRepository->findAll();
         $status = $statusRepository->findAll();
-        $tickets = $ticketsRepository->findAll();
+        $tickets = $ticketsRepository->findBy(['user' => $id], ['createdAt' => 'DESC']);
+        
+  
         return $this->render('user/show.html.twig', [
             'user' => $user,
             'images' => $images,
