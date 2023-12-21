@@ -17,11 +17,19 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 #[Route('/user')]
 class UserController extends AbstractController
 {
+
     #[Route('/', name: 'app_user_index', methods: ['GET'])]
-    public function index(UserRepository $userRepository): Response
+    public function index(TicketsRepository $ticketsRepository, UserRepository $userRepository): Response
     {
+        $users = $userRepository->findAll();
+
+        foreach ($users as $user) {
+            $ticketCount = $ticketsRepository->findTicketSolvedByUserId($user->getId());
+            $user->setTicketSolved(Count($ticketCount));
+        }
+
         return $this->render('user/index.html.twig', [
-            'users' => $userRepository->findAll(),
+            'users' => $users,
         ]);
     }
 
@@ -46,17 +54,20 @@ class UserController extends AbstractController
     }
 
     #[Route('/{id}', name: 'app_user_show', methods: ['GET'])]
-    public function show(User $user, ImagesRepository $imageRepository, StatusRepository $statusRepository, TicketsRepository $ticketsRepository): Response
+    public function show(User $user, ImagesRepository $imageRepository, StatusRepository $statusRepository, TicketsRepository $ticketsRepository, $id): Response
     {
+
         $images = $imageRepository->findAll();
         $status = $statusRepository->findAll();
-        $tickets = $ticketsRepository->findAll();
+        $tickets = $ticketsRepository->findBy(['user' => $id], ['createdAt' => 'DESC']);
+
+
         return $this->render('user/show.html.twig', [
             'user' => $user,
             'images' => $images,
             'status' => $status,
             'tickets' => $tickets
-            
+
         ]);
     }
 
@@ -81,7 +92,7 @@ class UserController extends AbstractController
     #[Route('/{id}', name: 'app_user_delete', methods: ['POST'])]
     public function delete(Request $request, User $user, EntityManagerInterface $entityManager): Response
     {
-        if ($this->isCsrfTokenValid('delete'.$user->getId(), $request->request->get('_token'))) {
+        if ($this->isCsrfTokenValid('delete' . $user->getId(), $request->request->get('_token'))) {
             $entityManager->remove($user);
             $entityManager->flush();
         }

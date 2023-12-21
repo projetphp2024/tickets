@@ -1,5 +1,5 @@
 <?php
-    
+
 namespace App\Entity;
 
 use App\Entity\avatarPath;
@@ -22,15 +22,15 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     #[ORM\Column(length: 180, unique: true)]
     private ?string $email = null;
-    
+
 
     #[ORM\Column]
     private array $roles = [];
 
     public const ROLE_USER = 'ROLE_USER';
     public const ROLE_ADMIN = 'ROLE_ADMIN';
-    
-    
+
+
     /**
      * @var string The hashed password
      */
@@ -45,19 +45,26 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     private ?string $fullName = "";
 
+    private ?int $ticketSolved = 0;
+
     #[ORM\Column(length: 255,)]
     private ?string $pseudo = null;
 
-    #[ORM\Column(length: 255,)]
-    private ?string $avatarPath;
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $avatarPath = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $discordPath = null;
+
 
     public function __construct()
     {
-      
+        $this->roles = [self::ROLE_USER];
     }
 
-    
-    
+
+
+
     public function getId(): ?int
     {
         return $this->id;
@@ -67,7 +74,19 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     {
         return $this->firstName . " " . $this->lastName;
     }
-    
+
+    public function getTicketSolved(): ?int
+    {
+        return $this->ticketSolved;
+    }
+
+    public function setTicketSolved(?int $ticketSolved): self
+    {
+        $this->ticketSolved = $ticketSolved;
+
+        return $this;
+    }
+
     public function getEmail(): ?string
     {
         return $this->email;
@@ -132,7 +151,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         // If you store any temporary, sensitive data on the user, clear it here
         // $this->plainPassword = null;
     }
-        
+
     public function getFirstName(): ?string
     {
         return $this->firstName;
@@ -168,20 +187,28 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
         return $this;
     }
+
     public function getAvatarPath(): ?string
     {
         return $this->avatarPath;
     }
 
-    public function setAvatarPath(string $avatarPath): static
+    public function setAvatarPath(?string $avatarPath): static
     {
         $this->avatarPath = $avatarPath;
 
         return $this;
     }
 
+    public function getDiscordPath(): ?string
+    {
+        return $this->discordPath;
+    }
 
-   
+    public function setDiscordPath(?string $discordPath): static
+    {
+        $this->discordPath = $discordPath;
 
-  
+        return $this;
+    }
 }

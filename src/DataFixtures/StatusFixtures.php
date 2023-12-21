@@ -26,6 +26,7 @@ class StatusFixtures extends Fixture
     {
         $category = new Status();
         $category->setLabel($label);
+        $category->setColor('red');
         $category->setSlug($this->slugger->slug($category->getLabel())->lower());
         $manager->persist($category);
 
