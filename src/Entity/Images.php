@@ -3,7 +3,12 @@
 namespace App\Entity;
 
 use App\Repository\ImagesRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+
+
+
 
 #[ORM\Entity(repositoryClass: ImagesRepository::class)]
 class Images
@@ -19,8 +24,26 @@ class Images
     #[ORM\ManyToOne(inversedBy: 'images')]
     private ?Comments $comment = null;
 
+
     #[ORM\Column(length: 255)]
     private ?string $path = null;
+
+    #[ORM\ManyToOne(inversedBy: 'images')]
+    private ?User $user = null;
+
+
+
+    public function __construct()
+    {
+        
+    }
+
+   
+
+    public function getId(): ?int
+    {
+        return $this->id;
+    }
 
     public function getTicket(): ?Tickets
     {
@@ -46,6 +69,7 @@ class Images
         return $this;
     }
 
+
     public function getPath(): ?string
     {
         return $this->path;
@@ -57,5 +81,19 @@ class Images
 
         return $this;
     }
+
+    public function getUser(): ?User
+    {
+        return $this->user;
+    }
+
+    public function setUser(?User $user): static
+    {
+        $this->user = $user;
+
+        return $this;
+    }
+
+
 
 }

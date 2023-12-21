@@ -2,6 +2,7 @@
 
 namespace App\DataFixtures;
 
+use App\Entity\User;
 use App\Entity\Images;
 use App\Entity\Tickets;
 use App\Entity\Comments;
@@ -12,6 +13,19 @@ use App\Entity\Ticket; // Assurez-vous d'importer la classe Ticket si ce n'est p
 
 class ImagesFixtures extends Fixture implements DependentFixtureInterface
 {
+    private function getUsersIds(ObjectManager $manager): array
+    {
+        // Récupérer tous les IDs des utilisateurs
+        $userIds = $manager->getRepository(User::class)->createQueryBuilder('u')
+            ->select('u.id')
+            ->getQuery()
+            ->getScalarResult();
+
+        // Transformer le résultat en un tableau simple d'IDs
+        $userIds = array_column($userIds, 'id');
+
+        return $userIds;
+    }
     private function getCommentIds(ObjectManager $manager): array
     {
         // Récupérer tous les IDs des commentaires
@@ -40,41 +54,41 @@ class ImagesFixtures extends Fixture implements DependentFixtureInterface
         return $ticketIds;
     }
 
+   
     public function load(ObjectManager $manager): void
     {
-        $basePath = 'public/images/';
+       
         $commentIds = $this->getCommentIds($manager);
         $ticketIds = $this->getTicketIds($manager);
+        $userIds = $this->getUsersIds($manager);
 
-        for ($i = 1; $i <= 40; $i++) {
+        $totalImages = 55;
+        $userImageLimit = count($userIds);
+        $commentImageLimit = ($totalImages - $userImageLimit) / 2;
+
+        for ($i = 1; $i <= $totalImages; $i++) {
             $image = new Images();
 
-            // Choisissez un ID de commentaire au hasard
-            $randomCommentId = $commentIds[array_rand($commentIds)];
-            $randomTicketId = $ticketIds[array_rand($ticketIds)];
+            // Choisissez un ID d'utilisateur au hasard
+            $randomUserId = $userIds[array_rand($userIds)];
 
             // Définir le chemin de l'image en utilisant le chemin de base et le numéro d'itération
-            $imagePath = $basePath . "image{$i}.jpg";
+            $imagePath = "snow.jpg";
             $image->setPath($imagePath);
 
-           
-            if ($i <= 20) {
+            // Attribuer les images équitablement entre les utilisateurs et les commentaires
+            if ($i <= $userImageLimit) {
+                $user = $manager->getRepository(User::class)->find($randomUserId);
+                $user->addImage($image);
+            } elseif ($i <= $userImageLimit + $commentImageLimit) {
+                $randomCommentId = $commentIds[array_rand($commentIds)];
                 $comment = $manager->getRepository(Comments::class)->find($randomCommentId);
                 $image->setComment($comment);
             } else {
+                $randomTicketId = $ticketIds[array_rand($ticketIds)];
                 $ticket = $manager->getRepository(Tickets::class)->find($randomTicketId);
                 $image->setTicket($ticket);
             }
-
-
-
-            // Utilisez l'ID de commentaire choisi au hasard
-       
-
-            // Choisissez un ID de ticket au hasard (décommentez si vous utilisez des tickets)
-            // $randomTicketId = $ticketIds[array_rand($ticketIds)];
-            // $ticket = $manager->getRepository(Ticket::class)->find($randomTicketId);
-            // $image->setTicket($ticket);
 
             $manager->persist($image);
         }

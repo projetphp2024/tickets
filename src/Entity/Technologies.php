@@ -24,9 +24,13 @@ class Technologies
     #[ORM\OneToMany(mappedBy: 'relation', targetEntity: Tickets::class)]
     private Collection $tickets;
 
+    #[ORM\OneToMany(mappedBy: 'technologie', targetEntity: Categories::class)]
+    private Collection $categories;
+
     public function __construct()
     {
         $this->tickets = new ArrayCollection();
+        $this->categories = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -70,6 +74,36 @@ class Technologies
             // set the owning side to null (unless already changed)
             if ($ticket->getRelation() === $this) {
                 $ticket->setRelation(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Categories>
+     */
+    public function getCategories(): Collection
+    {
+        return $this->categories;
+    }
+
+    public function addCategory(Categories $category): static
+    {
+        if (!$this->categories->contains($category)) {
+            $this->categories->add($category);
+            $category->setTechnologie($this);
+        }
+
+        return $this;
+    }
+
+    public function removeCategory(Categories $category): static
+    {
+        if ($this->categories->removeElement($category)) {
+            // set the owning side to null (unless already changed)
+            if ($category->getTechnologie() === $this) {
+                $category->setTechnologie(null);
             }
         }
 

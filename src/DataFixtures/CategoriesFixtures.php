@@ -4,7 +4,6 @@ namespace App\DataFixtures;
 
 use App\Entity\Tickets;
 use App\Entity\Categories;
-use App\Entity\Technologies;
 use Doctrine\Persistence\ObjectManager;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Symfony\Component\String\Slugger\SluggerInterface;
@@ -19,14 +18,14 @@ class CategoriesFixtures extends Fixture
     {
         $this->createCategory('Back-end', $manager);
         $this->createCategory('Front-end', $manager);
-
+        
         $manager->flush();
     }
     public function createCategory(string $label, ObjectManager $manager)
     {
         $category = new Categories();
         $category->setLabel($label);
-        $category->setSlug($this->slugger->slug($category->getLabel())->lower());
+        // $category->setSlug($this->slugger->slug($category->getLabel())->lower());
         $manager->persist($category);
     }
 }
