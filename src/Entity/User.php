@@ -45,15 +45,21 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     private ?string $fullName = "";
 
+    private ?int $ticketSolved = 0;
+
     #[ORM\Column(length: 255,)]
     private ?string $pseudo = null;
 
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $avatarPath = null;
 
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $discordPath = null;
+
+
     public function __construct()
     {
-
+        $this->roles = [self::ROLE_USER];
     }
 
 
@@ -181,8 +187,15 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
+    public function getDiscordPath(): ?string
+    {
+        return $this->discordPath;
+    }
 
+    public function setDiscordPath(?string $discordPath): static
+    {
+        $this->discordPath = $discordPath;
 
-
-
+        return $this;
+    }
 }
