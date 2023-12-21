@@ -17,13 +17,19 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 #[Route('/user')]
 class UserController extends AbstractController
 {
+
     #[Route('/', name: 'app_user_index', methods: ['GET'])]
-    public function index(UserRepository $userRepository, TicketsRepository $ticketsRepository): Response
-    {   $tickets = $ticketsRepository->findAll();
+    public function index(TicketsRepository $ticketsRepository, UserRepository $userRepository): Response
+    {
+        $users = $userRepository->findAll();
+
+        foreach ($users as $user) {
+            $ticketCount = $ticketsRepository->findTicketSolvedByUserId($user->getId());
+            $user->setTicketSolved(Count($ticketCount));
+        }
+
         return $this->render('user/index.html.twig', [
-            'users' => $userRepository->findAll(),
-            'tickets' => $tickets,
-            //'solvedByUser => $ticketsRepository-> faire un count solved by id = user.id
+            'users' => $users,
         ]);
     }
 
@@ -54,14 +60,14 @@ class UserController extends AbstractController
         $images = $imageRepository->findAll();
         $status = $statusRepository->findAll();
         $tickets = $ticketsRepository->findBy(['user' => $id], ['createdAt' => 'DESC']);
-        
-  
+
+
         return $this->render('user/show.html.twig', [
             'user' => $user,
             'images' => $images,
             'status' => $status,
             'tickets' => $tickets
-            
+
         ]);
     }
 
@@ -86,7 +92,7 @@ class UserController extends AbstractController
     #[Route('/{id}', name: 'app_user_delete', methods: ['POST'])]
     public function delete(Request $request, User $user, EntityManagerInterface $entityManager): Response
     {
-        if ($this->isCsrfTokenValid('delete'.$user->getId(), $request->request->get('_token'))) {
+        if ($this->isCsrfTokenValid('delete' . $user->getId(), $request->request->get('_token'))) {
             $entityManager->remove($user);
             $entityManager->flush();
         }

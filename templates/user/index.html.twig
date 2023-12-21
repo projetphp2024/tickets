@@ -10,9 +10,9 @@
 		<div class="card bg-white main-section">
 			<div class="card-body">
 				<div class="d-flex flex-wrap justify-content-center">
-					{%  for ticket in tickets %}
+					{%  for user in users %}
 							<div class="me-3 mb-3">
-								{% include 'components/user_card.html.twig' with {'user': ticket.user}   %}
+								{% include 'components/user_card.html.twig' with {'user': user}   %}
 							</div>
 					{% endfor %}
 				</div>
