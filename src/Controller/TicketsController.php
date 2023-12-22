@@ -12,6 +12,7 @@ use App\Repository\StatusRepository;
 use App\Repository\TicketsRepository;
 use App\Service\PictureService;
 use DateTime;
+use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -29,10 +30,18 @@ class TicketsController extends AbstractController
     }
 
     #[Route('/', name: 'app_tickets_index', methods: ['GET'])]
-    public function index(TicketsRepository $ticketsRepository): Response
+    public function index(TicketsRepository $ticketsRepository, EntityManagerInterface $entityManagerInterface): Response
     {
+        $user = $this->getUser(); // Récupérer l'utilisateur actuellement connecté
+        if (!$user) {
+            return $this->redirectToRoute('app_login'); // Rediriger si l'utilisateur n'est pas connecté
+        }
+    
+        // Modifier la requête pour obtenir uniquement les tickets de l'utilisateur connecté
+        $tickets = $entityManagerInterface->getRepository(Tickets::class)->findBy(['user' => $user]);
+    
         return $this->render('tickets/index.html.twig', [
-            'tickets' => $this->ticketsRepository->findAll(),
+            'tickets' => $tickets,
         ]);
     }
 

@@ -17,7 +17,7 @@ class MainController extends AbstractController
     public function index(StatusRepository $statusRepository, TicketsRepository $ticketsRepository): Response
     {
         $status = $statusRepository->findAll();
-        $tickets = $ticketsRepository->findAll();
+        $tickets = $ticketsRepository->findBy([], ['createdAt' => 'DESC']);
 
         return $this->render('main/index.html.twig', [
             'controller_name' => 'MainController',
