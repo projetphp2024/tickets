@@ -14,11 +14,13 @@ use App\Service\PictureService;
 use DateTime;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityManagerInterface;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
+#[IsGranted('ROLE_USER')]
 #[Route('/tickets')]
 class TicketsController extends AbstractController
 {
@@ -36,10 +38,10 @@ class TicketsController extends AbstractController
         if (!$user) {
             return $this->redirectToRoute('app_login'); // Rediriger si l'utilisateur n'est pas connecté
         }
-    
+
         // Modifier la requête pour obtenir uniquement les tickets de l'utilisateur connecté
         $tickets = $entityManagerInterface->getRepository(Tickets::class)->findBy(['user' => $user]);
-    
+
         return $this->render('tickets/index.html.twig', [
             'tickets' => $tickets,
         ]);

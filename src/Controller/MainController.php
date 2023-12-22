@@ -7,10 +7,12 @@ use App\Repository\UserRepository;
 use App\Repository\StatusRepository;
 use App\Repository\TicketsRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
+#[IsGranted('ROLE_USER')]
 class MainController extends AbstractController
 {
     #[Route('/', name: 'app_main')]

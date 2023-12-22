@@ -75,6 +75,7 @@
 		</div>
 		<!-- Sidebar -->
 		<div class="d-flex">
+			{% if app.user %}
 			<nav class="d-none d-md-block bg-main sidebar navbar sticky-top" style="width: max-content; top: 53px; bottom: 0; height: 100%;">
 					<div class="text-dark-pink mb-3" style="min-height: 53px; max-height: 53px;">
 						<a class="d-block p-2 navbar-brand text-center" href="#">
@@ -126,7 +127,7 @@
 								<span>Stats</span>
 							</a>
 						</li>
-						{% if app.user.roles[0] == "ROLE_ADMIN" %}
+						{% if app.user and 'ROLE_ADMIN' in app.user.roles %}
 						<li class="nav-item mt-5">
 							<a class="nav-link" href="{{ path('app_admin') }}">
 								<svg width="21" height="21" viewBox="0 0 21 21" fill="none"
@@ -141,6 +142,7 @@
 						{% endif %}
 					</ul>
 			</nav>
+			{% endif %}
 			<div class="w-100">
 				<div class="p-4">
 					{% block body %}{% endblock %}

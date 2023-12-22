@@ -5,9 +5,11 @@ namespace App\Controller;
 use App\Repository\CategoriesRepository;
 use App\Repository\TicketsRepository;
 use App\Repository\UserRepository;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+
 
 class AdminController extends AbstractController
 {
