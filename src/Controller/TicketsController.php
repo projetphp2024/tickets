@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Comments;
 use App\Entity\Tickets;
 use App\Form\CommentsType;
+use App\Form\TakeTicketType;
 use App\Form\TicketsType;
 use App\Repository\StatusRepository;
 use App\Repository\TicketsRepository;
@@ -21,7 +22,8 @@ class TicketsController extends AbstractController
     public function __construct(
         private StatusRepository $statusRepository,
         private TicketsRepository $ticketsRepository
-    ){}
+    ) {
+    }
 
     #[Route('/', name: 'app_tickets_index', methods: ['GET'])]
     public function index(TicketsRepository $ticketsRepository): Response
@@ -49,6 +51,7 @@ class TicketsController extends AbstractController
             $entityManager->flush();
 
             return $this->redirectToRoute('app_main', [], Response::HTTP_SEE_OTHER);
+
         }
 
         return $this->renderForm('tickets/new.html.twig', [
@@ -57,32 +60,50 @@ class TicketsController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}', name: 'app_tickets_show', methods: ['GET'])]
-    public function show(Tickets $ticket,$id, Request $request, EntityManagerInterface $entityManager): Response
+    #[Route('/{id}', name: 'app_tickets_show', methods: ['GET', 'POST', 'PUT'])]
+    public function show(Tickets $ticket, $id, Request $request, EntityManagerInterface $entityManager): Response
     {
         $comment = new Comments();
-
         $form = $this->createForm(CommentsType::class, $comment);
-
         $form->handleRequest($request);
 
+        $formButton = $this->createForm(TakeTicketType::class, $ticket);
+        $formButton->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()){
+        if ($form->isSubmitted() && $form->isValid()) {
 
             $comment->setCreatedAt(new DateTime);
             $comment->setupdateAt(new DateTime);
+
 
             $comment->setUser($this->getUser());
 
             $comment->setTicket($this->ticketsRepository->find($id));
 
+            $ticket->setStatus($this->statusRepository->findOneBy(['id' => 3]));
+
             $entityManager->persist($comment);
+
             $entityManager->flush();
+
+            return $this->redirectToRoute('app_tickets_show', ['id' => $id], Response::HTTP_SEE_OTHER);
+        }
+
+        if ($formButton->isSubmitted() && $formButton->isValid()){
+
+            $ticket->setSolvedBy($this->getUser());
+
+            $entityManager->flush();
+
+            return $this->redirectToRoute('app_tickets_show', ['id' => $id], Response::HTTP_SEE_OTHER);
+
         }
 
 
         return $this->render('tickets/show.html.twig', [
             'ticket' => $ticket,
+            'form' => $form->createView(),
+            'formButton' => $formButton->createView()
         ]);
     }
 
@@ -107,7 +128,7 @@ class TicketsController extends AbstractController
     #[Route('/{id}', name: 'app_tickets_delete', methods: ['POST'])]
     public function delete(Request $request, Tickets $ticket, EntityManagerInterface $entityManager): Response
     {
-        if ($this->isCsrfTokenValid('delete'.$ticket->getId(), $request->request->get('_token'))) {
+        if ($this->isCsrfTokenValid('delete' . $ticket->getId(), $request->request->get('_token'))) {
             $entityManager->remove($ticket);
             $entityManager->flush();
         }
