@@ -31,7 +31,7 @@ class Comments
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
     private ?\DateTimeInterface $updateAt = null;
 
-    #[ORM\OneToMany(mappedBy: 'comment', targetEntity: Images::class)]
+    #[ORM\OneToMany(mappedBy: 'comment', targetEntity: Images::class, cascade: ['persist'])]
     private Collection $images;
 
     public function __construct()

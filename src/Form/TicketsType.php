@@ -8,10 +8,12 @@ use App\Entity\Technologies;
 use App\Entity\Tickets;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Validator\Constraints\File;
 
 class TicketsType extends AbstractType
 {
@@ -35,6 +37,12 @@ class TicketsType extends AbstractType
                 'class' => Technologies::class,
                 'choice_label' => 'label',
                 'attr' => ['class' => 'form-control-lg']
+            ])
+            ->add('images', FileType::class, [
+                'label' => 'Images',
+                'multiple' => true,
+                'mapped' => false,
+                'required' => false,
             ])
         ;
     }
