@@ -14,32 +14,36 @@
                 <div class="container text-center mt-5">
                     <div class="row mt-3 d-flex justify-content-around">
                         <div class="col-lg-3 col-md-4 col-sm-12">
-                            <label for="exampleFormControlInput1" class="form-label">{{ form_row(registrationForm.email) }}</label>
+                            {{ form_row(registrationForm.email, {'label': 'Email'}) }}
                         </div>
                         <div class="col-lg-3 col-md-4 col-sm-12">
-                            <label for="exampleFormControlInput1" class="form-label">{{ form_row(registrationForm.firstName) }}</label>
+                            {{ form_row(registrationForm.firstName, {'label': 'Prénom'}) }}
                         </div>
                         <div class="col-lg-3 col-md-4 col-sm-12">
-                            <label for="exampleFormControlInput1" class="form-label">{{ form_row(registrationForm.lastName) }}</label>
+                            {{ form_row(registrationForm.lastName, {'label': 'Nom'}) }}
                         </div>
                         <div class="col-lg-3 col-md-4 col-sm-12">
-                            <label for="exampleFormControlInput1" class="form-label">{{ form_row(registrationForm.pseudo) }}</label>
+                            {{ form_row(registrationForm.pseudo, {'label': 'Pseudo'}) }}
+                        </div>
+                    </div>
+                    <div class="row justify-content-center mt-5">
+                        <!-- Avatar field -->
+                        <div class="col-md-4 ">
+                            {{ form_row(registrationForm.avatar, {'label': 'Avatar (quel est votre style ?)'}) }}
                         </div>
                     </div>
                     <div class="row justify-content-center mt-5">
                         <div class="col-md-4 ">
-                            <div id="passwordHelpBlock" class="form-text">
-                                {{ form_row(registrationForm.plainPassword, { label: 'Password'}) }}
-                            </div>
+                            {{ form_row(registrationForm.plainPassword, {'label': 'Mot de passe'}) }}
+                            {{ form_row(registrationForm.agreeTerms) }}
                         </div>
                     </div>
                     <div class="row justify-content-center mt-5">
                         <div class="col-md-4">
-                            <button type="submit" class="btn-first">Création compte</button>
+                            <button type="submit" class="btn btn-first">Création compte</button>
                         </div>
                     </div>
                 </div>
-                {{ form_row(registrationForm.agreeTerms) }}
                 {{ form_end(registrationForm) }}
             </div>
         </div>

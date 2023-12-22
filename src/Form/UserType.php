@@ -40,17 +40,20 @@ class UserType extends AbstractType
                     ],
                 ])
                 ->add('discordPath')
-                ->add('image', FileType::class, [
-                    'label' => 'Photo de l’article',
-                    'mapped' => false,
+                ->add('avatar', FileType::class, [
+                    'label' => 'Avatar (Image file)',
+                    'mapped' => false, 
                     'required' => false,
                     'constraints' => [
                         new File([
-                            'maxSize' => '5000k',
+                            'maxSize' => '1024k',
                             'mimeTypes' => [
-                                'image/*',
+                                'image/jpeg',
+                                'image/png',
+                                'image/gif',
+                                'image/jpg',
                             ],
-                            'mimeTypesMessage' => 'Image trop lourde',
+                            'mimeTypesMessage' => 'Mettez une image valide (jpeg,jpg, png, gif)',
                         ])
                     ],
                 ]);
@@ -59,7 +62,7 @@ class UserType extends AbstractType
                 ->add('email')
                 ->add('pseudo')
                 ->add('discordPath')
-                ->add('image', FileType::class, [
+                ->add('avatar', FileType::class, [
                     'label' => 'Photo de l’article',
                     'mapped' => false,
                     'required' => false,
