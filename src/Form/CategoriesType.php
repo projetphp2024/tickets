@@ -3,6 +3,7 @@
 namespace App\Form;
 
 use App\Entity\Categories;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -14,7 +15,11 @@ class CategoriesType extends AbstractType
         $builder
             ->add('label')
             ->add('color')
-            ->add('technologie')
+            ->add('technologie', EntityType::class, [
+                'class' => 'App\Entity\Technologies',
+                'choice_label' => 'label',
+                'expanded' => true,
+            ])
         ;
     }
 
