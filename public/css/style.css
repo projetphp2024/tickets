@@ -80,6 +80,7 @@ body{
 
 .text-purple {
     color: var(--purple-color);
+    font-size: medium;
 }
 
 .text-lighter-purple {
