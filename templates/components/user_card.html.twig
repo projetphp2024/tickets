@@ -16,7 +16,8 @@
 		opacity: 1;
 	}
 </style>
-	<a href="#" class="d-block">
+
+	<a href="{{ path('app_user_show', {'id': user.id}) }}" class="d-block">
 		<div class="hover-image-container position-relative overflow-hidden">
 			<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTkq3iQYVKllbdVHi-Lry0cRuKzGMMnWhEFCg&usqp=CAU" alt="Profil" class="img-fluid w-100 h-100 object-fit-cover">
 			<div class="image-overlay position-absolute top-0 start-0 w-100 h-100 d-flex flex-column align-items-center justify-content-center">
@@ -27,3 +28,4 @@
 				</div>
 			</div>
 		</div>
+	</a>
