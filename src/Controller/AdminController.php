@@ -24,11 +24,15 @@ class AdminController extends AbstractController
         $users = $this->userRepository->findAll();
         $tickets = $this->ticketsRepository->findAll();
         $categories = $this->categoriesRepository->findAll();
-
+        foreach ($users as $user) {
+            $ticketCount = $this->ticketsRepository->findTicketSolvedByUserId($user->getId());
+            $user->setTicketSolved(Count($ticketCount));
+        }
         return $this->render('admin/index.html.twig', [
             'users' => $users,
             'categories' => $categories,
-            'tickets' => $tickets
+            'tickets' => $tickets,
+            'user' => $user
         ]);
     }
 }
