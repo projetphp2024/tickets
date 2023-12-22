@@ -4,6 +4,11 @@
 {% endblock %}
 
 {% block body %}
+<style>
+.text-dark-pink:hover{
+	color:#5E63EB
+}
+</style>
 	<form method="post">
 		{% if error %}
 			<div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
@@ -45,11 +50,15 @@
 									</button>
 								</div>
 							</div>
-
+							
 						</div>
+						
 					</div>
 				</div>
 			</div>
+			<div class='ms-3 mt-4'>
+								<a class="text-dark-pink" href="{{ path('forgotten_password') }}">Mot de pass oublié</a>
+							</div>
 		</div>
 	</form>
 {% endblock %}

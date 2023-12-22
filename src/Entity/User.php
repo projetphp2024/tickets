@@ -57,6 +57,8 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private ?string $discordPath = null;
 
 
+
+
     public function __construct()
     {
         $this->roles = [self::ROLE_USER];
@@ -198,4 +200,5 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
         return $this;
     }
+
 }
