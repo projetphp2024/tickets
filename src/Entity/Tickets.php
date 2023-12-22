@@ -50,7 +50,7 @@ class Tickets
     #[ORM\OneToMany(mappedBy: 'ticket', targetEntity: Images::class)]
     private Collection $comment;
 
-    #[ORM\OneToMany(mappedBy: 'ticket', targetEntity: Images::class)]
+    #[ORM\OneToMany(mappedBy: 'ticket', targetEntity: Images::class, cascade: ['persist'] )]
     private Collection $images;
 
     public function __construct()

@@ -13,6 +13,13 @@
                 <span class="fs-6 fw-light">{{ ticket.createdAt|date('Y-m-d H:i') }}</span>
             </div>
             <p style="white-space: pre-line;">{{ticket.description}}</p>
+            {% if ticket.images | length > 0 %}
+            <div class="d-flex flex-wrap mb-3">
+                {% for image in ticket.images %}
+                    <img width="auto" height="300" src="{{asset('images/' ~ image.path )}}" alt="zrtr">
+                {% endfor %}
+            </div>
+            {% endif %}
             <div class="d-flex align-items-center">
                 <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTkq3iQYVKllbdVHi-Lry0cRuKzGMMnWhEFCg&usqp=CAU"
                     alt="John Snow" class="rounded-circle me-2" width="50" height="50">

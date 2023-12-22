@@ -3,12 +3,14 @@
 namespace App\Controller;
 
 use App\Entity\Comments;
+use App\Entity\Images;
 use App\Entity\Tickets;
 use App\Form\CommentsType;
 use App\Form\TakeTicketType;
 use App\Form\TicketsType;
 use App\Repository\StatusRepository;
 use App\Repository\TicketsRepository;
+use App\Service\PictureService;
 use DateTime;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -21,7 +23,8 @@ class TicketsController extends AbstractController
 {
     public function __construct(
         private StatusRepository $statusRepository,
-        private TicketsRepository $ticketsRepository
+        private TicketsRepository $ticketsRepository,
+        private PictureService $pictureService
     ) {
     }
 
@@ -37,21 +40,34 @@ class TicketsController extends AbstractController
     public function new(Request $request, EntityManagerInterface $entityManager): Response
     {
         $ticket = new Tickets();
+
         $form = $this->createForm(TicketsType::class, $ticket);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+
+
+            $images = $form->get('images')->getData();
+
+            foreach ($images as $image) {
+                $fichier = $this->pictureService->add($image, '');
+
+                $img = new Images();
+
+                $img->setPath($fichier);
+                $ticket->addImage($img);
+            }
 
             $ticket->setStatus($this->statusRepository->findOneBy([]));
             $ticket->setUser($this->getUser());
             $ticket->setCreatedAt(new DateTime());
             $ticket->setUpdatedAt(new DateTime());
 
+
             $entityManager->persist($ticket);
             $entityManager->flush();
 
             return $this->redirectToRoute('app_main', [], Response::HTTP_SEE_OTHER);
-
         }
 
         return $this->renderForm('tickets/new.html.twig', [
@@ -72,6 +88,17 @@ class TicketsController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
 
+            $images = $form->get('images')->getData();
+
+            foreach ($images as $image) {
+                $fichier = $this->pictureService->add($image, '');
+
+                $img = new Images();
+
+                $img->setPath($fichier);
+                $comment->addImage($img);
+            }
+
             $comment->setCreatedAt(new DateTime);
             $comment->setupdateAt(new DateTime);
 
@@ -89,14 +116,15 @@ class TicketsController extends AbstractController
             return $this->redirectToRoute('app_tickets_show', ['id' => $id], Response::HTTP_SEE_OTHER);
         }
 
-        if ($formButton->isSubmitted() && $formButton->isValid()){
+        if ($formButton->isSubmitted() && $formButton->isValid()) {
 
             $ticket->setSolvedBy($this->getUser());
+
+
 
             $entityManager->flush();
 
             return $this->redirectToRoute('app_tickets_show', ['id' => $id], Response::HTTP_SEE_OTHER);
-
         }
 
 

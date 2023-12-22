@@ -6,5 +6,12 @@
             <span class="name">{{comment.user.pseudo}}</span>
         </div>
         <p style="white-space: pre-line;"> {{comment.content}} </p>
+        {% if comment.images | length > 0 %}
+        <div class="d-flex flex-wrap mb-3">
+            {% for image in comment.images %}
+            <img width="auto" height="300" src="{{asset('images/' ~ image.path )}}" alt="zrtr">
+            {% endfor %}
+        </div>
+        {% endif %}
     </div>
 </div>
