@@ -4,6 +4,7 @@ namespace App\Form;
 
 use App\Entity\Comments;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -12,11 +13,9 @@ class CommentsType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('content')
-            ->add('CreatedAt')
-            ->add('updateAt')
-            ->add('ticket')
-            ->add('user')
+            ->add('content', TextareaType::class,[
+                'attr' => ['label' => 'Contenu', 'rows' => 10]
+            ])
         ;
     }
 
