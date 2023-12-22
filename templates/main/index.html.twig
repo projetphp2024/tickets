@@ -109,10 +109,10 @@
 							</div>
 							<div class="d-flex align-items-center justify-content-between">
 								<div class="d-flex align-items-center">
-									<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTkq3iQYVKllbdVHi-Lry0cRuKzGMMnWhEFCg&usqp=CAU" alt="John Snow" class="rounded-circle me-2" width="50" height="50">
-									<span class="name">{{ticket.user.pseudo}}</span>
+									<img src="{{ ticket.user.avatarPath ? asset('images/avatars/' ~ ticket.user.avatarPath) : 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTkq3iQYVKllbdVHi-Lry0cRuKzGMMnWhEFCg&usqp=CAU' }}" alt="{{ ticket.user.pseudo }}" class="rounded-circle me-2" width="50" height="50">
+									<span class="name">{{ ticket.user.pseudo }}</span>
 								</div>
-								<a href="{{path('app_tickets_show', { 'id' : ticket.id } )}}" class="">Ouvrir le ticket</a>
+								<a href="{{ path('app_tickets_show', { 'id' : ticket.id } ) }}">Ouvrir le ticket</a>
 							</div>
 						</div>
 					</div>
@@ -122,28 +122,28 @@
 	</div>
 </div>
 <script>
-var selectedStatus = '';
+	var selectedStatus = '';
 var selectedPeriod = 'all';
 
 // Add event listeners to status buttons
-document.querySelectorAll('.filter-buttons .btn').forEach(function(button) {
-    button.addEventListener('click', function() {
-        updateActiveStatus(button.dataset.status);
-    });
+document.querySelectorAll('.filter-buttons .btn').forEach(function (button) {
+button.addEventListener('click', function () {
+updateActiveStatus(button.dataset.status);
+});
 });
 
 function updateActiveStatus(status) {
-    selectedStatus = status;
-    filterTickets();
+selectedStatus = status;
+filterTickets();
 }
 
-document.querySelector('.choice-list').addEventListener('change', function() {
-    updateActiveStatus(this.value);
+document.querySelector('.choice-list').addEventListener('change', function () {
+updateActiveStatus(this.value);
 });
 
 function filterByDate(selectElement) {
-    selectedPeriod = selectElement.value;
-    filterTickets();
+selectedPeriod = selectElement.value;
+filterTickets();
 }
 
 
@@ -211,5 +211,4 @@ if (e.key === 'Enter') {
 e.preventDefault();
 }
 });
-</script>
-{% endblock %}
+</script>{% endblock %}
