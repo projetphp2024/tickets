@@ -14,8 +14,7 @@
             </div>
             <p style="white-space: pre-line;">{{ticket.description}}</p>
             <div class="d-flex align-items-center">
-                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTkq3iQYVKllbdVHi-Lry0cRuKzGMMnWhEFCg&usqp=CAU"
-                    alt="John Snow" class="rounded-circle me-2" width="50" height="50">
+                <img src="{{ ticket.user.avatarPath ? asset('images/avatars/' ~ ticket.user.avatarPath) : 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTkq3iQYVKllbdVHi-Lry0cRuKzGMMnWhEFCg&usqp=CAU' }}" alt="{{ ticket.user.pseudo }}" class="rounded-circle me-2" width="50" height="50">
                 <span class="name">{{ticket.user.pseudo}}</span>
             </div>
             <div class="border-bottom py-3"></div>
