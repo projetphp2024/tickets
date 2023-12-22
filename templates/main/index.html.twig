@@ -76,7 +76,7 @@
 							<option value="week">Cette semaine</option>
 							<option value="month">Ce mois</option>
 						</select>
-						<button class="btn btn-first">Nouveau ticket</button>
+						<a class="btn btn-first" href="{{ path('app_tickets_new') }}">Nouveau ticket</a>
 					</div>
 				</div>
 
@@ -112,7 +112,7 @@
 									<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTkq3iQYVKllbdVHi-Lry0cRuKzGMMnWhEFCg&usqp=CAU" alt="John Snow" class="rounded-circle me-2" width="50" height="50">
 									<span class="name">{{ticket.user.pseudo}}</span>
 								</div>
-								<a href="#" class="">Ouvrir le ticket</a>
+								<a href="{{path('app_tickets_show', { 'id' : ticket.id } )}}" class="">Ouvrir le ticket</a>
 							</div>
 						</div>
 					</div>

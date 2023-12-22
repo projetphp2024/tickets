@@ -45,7 +45,7 @@
 							<input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
 							<div class="row justify-content-center mt-5 ">
 								<div class='col-md-4'>
-									<button class="btn-first" type="submit">
+									<button class="btn btn-first" type="submit">
 										Connexion
 									</button>
 								</div>
@@ -56,9 +56,6 @@
 					</div>
 				</div>
 			</div>
-			<div class='ms-3 mt-4'>
-								<a class="text-dark-pink" href="{{ path('forgotten_password') }}">Mot de pass oublié</a>
-							</div>
 		</div>
 	</form>
 {% endblock %}
